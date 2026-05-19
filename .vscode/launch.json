@@ -1,0 +1,147 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Python: Notification hub",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/backend/Server/notification_hub.py",
+      "cwd": "${workspaceFolder}/backend",
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "Python: Worker (gaze)",
+      "type": "python",
+      "request": "launch",
+      "module": "pipeline.worker",
+      "cwd": "${workspaceFolder}/backend/Python",
+      "env": { "PYTHONPATH": "${workspaceFolder}/backend/Python" },
+      "args": ["--name", "gaze", "--port", "5111"],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "Python: Worker (face)",
+      "type": "python",
+      "request": "launch",
+      "module": "pipeline.worker",
+      "cwd": "${workspaceFolder}/backend/Python",
+      "env": { "PYTHONPATH": "${workspaceFolder}/backend/Python" },
+      "args": ["--name", "face", "--port", "5112"],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "Python: Worker (object)",
+      "type": "python",
+      "request": "launch",
+      "module": "pipeline.worker",
+      "cwd": "${workspaceFolder}/backend/Python",
+      "env": { "PYTHONPATH": "${workspaceFolder}/backend/Python" },
+      "args": ["--name", "object", "--port", "5113"],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "Python: Worker (mediapipe)",
+      "type": "python",
+      "request": "launch",
+      "module": "pipeline.worker",
+      "cwd": "${workspaceFolder}/backend/Python",
+      "env": { "PYTHONPATH": "${workspaceFolder}/backend/Python" },
+      "args": ["--name", "mediapipe", "--port", "5114"],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "Python: Worker (bluetooth)",
+      "type": "python",
+      "request": "launch",
+      "module": "pipeline.worker",
+      "cwd": "${workspaceFolder}/backend/Python",
+      "env": { "PYTHONPATH": "${workspaceFolder}/backend/Python" },
+      "args": ["--name", "bluetooth", "--port", "5115"],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "Python: main.py (pipeline)",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/backend/Python/main.py",
+      "cwd": "${workspaceFolder}/backend/Python",
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}/backend/Python",
+        "MAIN_SKIP_CAMERA": "1"
+      },
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "Python: tuio_only_service",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/backend/Python/tuio_only_service.py",
+      "cwd": "${workspaceFolder}/backend/Python",
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}/backend/Python",
+        "TUIO_PLANE_SOURCE": "bottle_hand",
+        "TUIO_HUB_ENABLE": "1",
+        "TUIO_CUP_LOCAL_YOLO": "1",
+        "TUIO_LASER_ENABLE": "0",
+        "OBJECT_TARGET_CLASSES": "bottle"
+      },
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "Python: face_auth_service",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/backend/Python/face_auth_service.py",
+      "cwd": "${workspaceFolder}/backend/Python",
+      "env": { "PYTHONPATH": "${workspaceFolder}/backend/Python" },
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": ".NET: TuioDemo (WinForms)",
+      "type": "dotnet",
+      "request": "launch",
+      "preLaunchTask": "HCI: Build TuioDemo (Debug)",
+      "projectPath": "${workspaceFolder}/backend/CSharp/TUIO11_NET/TUIO_DEMO.csproj",
+      "cwd": "${workspaceFolder}/backend/CSharp/TUIO11_NET/bin/Debug/net48",
+      "env": {
+        "TUIO_DEMO_AUTO_REACTIVISION": "0"
+      }
+    }
+  ],
+  "compounds": [
+    {
+      "name": "HCI: Debug all Python services (manual)",
+      "configurations": [
+        "Python: Notification hub",
+        "Python: Worker (gaze)",
+        "Python: Worker (face)",
+        "Python: Worker (object)",
+        "Python: Worker (mediapipe)",
+        "Python: Worker (bluetooth)",
+        "Python: main.py (pipeline)",
+        "Python: tuio_only_service",
+        "Python: face_auth_service"
+      ],
+      "stopAll": true,
+      "presentation": { "group": "hci", "order": 2 }
+    },
+    {
+      "name": "HCI: Hub + face auth only",
+      "configurations": [
+        "Python: Notification hub",
+        "Python: face_auth_service"
+      ],
+      "stopAll": true,
+      "presentation": { "group": "hci", "order": 3 }
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "python.defaultInterpreterPath": "C:\\Program Files\\Python311\\python.exe",
+  "python.terminal.activateEnvironment": true,
+  "python.analysis.extraPaths": ["${workspaceFolder}/backend/Python"],
+  "terminal.integrated.env.windows": {
+    "PYTHONPATH": "${workspaceFolder}/backend/Python",
+    "MAIN_CAPTURE_INDEX": "4",
+    "TUIO_CAPTURE_INDEX": "2",
+    "FACE_CAPTURE_INDEX": "4",
+    "CAMERA_CAPTURE_BACKEND": "dshow",
+    "TUIO_PLANE_SOURCE": "bottle_hand",
+    "TUIO_LASER_ENABLE": "0",
+    "TUIO_HUB_ENABLE": "1",
+    "TUIO_DEMO_AUTO_REACTIVISION": "1",
+    "HUB_HOST": "127.0.0.1",
+    "HUB_PORT": "5000"
+  },
+  "files.exclude": {
+    "**/__pycache__": true,
+    "**/.pytest_cache": true
+  }
+}

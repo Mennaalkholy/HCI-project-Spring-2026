@@ -1,0 +1,200 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "HCI: Install Python dependencies (3.11)",
+      "type": "shell",
+      "command": "py",
+      "args": [
+        "-3.11",
+        "-m",
+        "pip",
+        "install",
+        "-r",
+        "requirements.txt"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}/backend/Python"
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "focus": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "HCI: Verify MediaPipe + YOLO (3.11)",
+      "type": "shell",
+      "command": "py",
+      "args": [
+        "-3.11",
+        "-c",
+        "import mediapipe as mp; assert hasattr(mp,'solutions'), 'mediapipe missing solutions — pip install mediapipe==0.10.14 on Python 3.11'; import ultralytics; print('OK: mediapipe', mp.__version__, '+ ultralytics', ultralytics.__version__)"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}/backend/Python"
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "HCI: Build TuioDemo (Debug)",
+      "type": "shell",
+      "command": "dotnet",
+      "args": [
+        "build",
+        "${workspaceFolder}/backend/CSharp/TUIO11_NET/TUIO_DEMO.csproj",
+        "-c",
+        "Debug",
+        "-v",
+        "m"
+      ],
+      "group": "build",
+      "presentation": {
+        "reveal": "silent",
+        "panel": "shared"
+      },
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "HCI: Start full stack",
+      "dependsOn": [
+        "HCI: Install Python dependencies (3.11)",
+        "HCI: Build TuioDemo (Debug)"
+      ],
+      "dependsOrder": "sequence",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/backend/Scripts/start-hci.ps1",
+        "-WithFaceAuth",
+        "-LaunchTuioDemo",
+        "-SingleWebcam",
+        "-LaunchReacTIVision"
+      ],
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "HCI: Start full stack (skip pip install)",
+      "dependsOn": ["HCI: Build TuioDemo (Debug)"],
+      "dependsOrder": "sequence",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/backend/Scripts/start-hci.ps1",
+        "-WithFaceAuth",
+        "-LaunchTuioDemo",
+        "-SingleWebcam",
+        "-LaunchReacTIVision"
+      ],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "HCI: Start minimal (hub + face + game)",
+      "dependsOn": ["HCI: Build TuioDemo (Debug)"],
+      "dependsOrder": "sequence",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/backend/Scripts/start-hci.ps1",
+        "-Minimal",
+        "-WithFaceAuth",
+        "-LaunchTuioDemo",
+        "-SingleWebcam"
+      ],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "HCI: Perf test (skip face login)",
+      "dependsOn": ["HCI: Build TuioDemo (Debug)"],
+      "dependsOrder": "sequence",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/backend/Scripts/start-hci.ps1",
+        "-LaunchTuioDemo",
+        "-SingleWebcam",
+        "-PerfTestGame"
+      ],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "HCI: Run tests (pytest)",
+      "type": "shell",
+      "command": "py",
+      "args": ["-3.11", "-m", "pytest", "-q"],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "HCI: Run TuioDemo.exe",
+      "dependsOn": ["HCI: Build TuioDemo (Debug)"],
+      "dependsOrder": "sequence",
+      "type": "shell",
+      "command": "${workspaceFolder}/backend/CSharp/TUIO11_NET/bin/Debug/net48/TuioDemo.exe",
+      "options": {
+        "cwd": "${workspaceFolder}/backend/CSharp/TUIO11_NET/bin/Debug/net48",
+        "env": {
+          "TUIO_DEMO_AUTO_REACTIVISION": "0"
+        }
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    }
+  ]
+}

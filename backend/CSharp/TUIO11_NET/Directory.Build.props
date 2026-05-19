@@ -1,0 +1,6 @@
+<Project>
+  <PropertyGroup>
+    <!-- VS / MSBuild may use RuntimeIdentifier=win7-x86 (x86 platform). Restore must include these RIDs (NETSDK1047). -->
+    <RuntimeIdentifiers>win-x86;win-x64;win7-x86;win7-x64</RuntimeIdentifiers>
+  </PropertyGroup>
+</Project>

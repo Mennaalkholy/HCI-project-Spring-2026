@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net48</TargetFramework>
+    <AssemblyName>TuioDemo</AssemblyName>
+    <RootNamespace>TuioDemo</RootNamespace>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Nullable>disable</Nullable>
+    <Optimize Condition="'$(Configuration)'=='Release'">true</Optimize>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="System.Web.Extensions" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="TuioDump.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="TuioDemo.resx">
+      <DependentUpon>TuioDemo.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="child_pointer.png" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="teen_pointer.png" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="adult_pointer.png" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>

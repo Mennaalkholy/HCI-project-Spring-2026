@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>net48</TargetFramework>
+    <AssemblyName>libTUIO</AssemblyName>
+    <RootNamespace>libTUIO</RootNamespace>
+    <Nullable>disable</Nullable>
+    <Optimize Condition="'$(Configuration)'=='Release'">true</Optimize>
+    <DocumentationFile Condition="'$(Configuration)'=='Release'">doc\TUIO_CSHARP.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="SocketClient.cs" />
+    <Compile Remove="TuioDemo.cs" />
+    <Compile Remove="TuioDemoObject.cs" />
+    <Compile Remove="TuioDump.cs" />
+  </ItemGroup>
+
+</Project>
